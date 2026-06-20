@@ -1,0 +1,5 @@
+queue.csv
+*.backup
+*.backup2
+__pycache__/
+*.pyc
