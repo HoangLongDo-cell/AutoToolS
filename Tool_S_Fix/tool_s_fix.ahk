@@ -18,6 +18,7 @@ global mess_chat_click_x := 870
 global mess_chat_click_y := 470
 global stop_flag := false
 global is_watching := false
+global graded_count := 0
 
 MainGUI() {
     global MyGui, LV
@@ -424,7 +425,44 @@ ProcessQueueFix() {
         UpdateCSV(&lines, target_idx, "Đã làm", "", end_time)
         LoadQueueToLV()
         Sleep(2000)
+        
+        graded_count++
+        if (graded_count >= 5) {
+            PasteThongTinSToGpt(id_gpt)
+            graded_count := 0
+        }
     }
+}
+
+PasteThongTinSToGpt(gpt_win) {
+    thong_tin_file := A_ScriptDir "\thong_tin_s.txt"
+    if !FileExist(thong_tin_file)
+        return
+        
+    content := FileRead(thong_tin_file, "UTF-8")
+    if (Trim(content) == "")
+        return
+        
+    WinActivate("ahk_id " gpt_win)
+    if !WinWaitActive("ahk_id " gpt_win,, 5)
+        return
+    Sleep(1000)
+    
+    ClickGptChat(gpt_win)
+    Sleep(500)
+    
+    A_Clipboard := content
+    ClipWait(2)
+    Send("^v")
+    Sleep(2000)
+    
+    Send("{Enter}")
+    Sleep(1000)
+    Send("{Enter}")
+    Sleep(1000)
+    
+    ; Đợi GPT đọc xong (khoảng 5s)
+    Sleep(5000)
 }
 
 ClickPageChat(chat_win) {

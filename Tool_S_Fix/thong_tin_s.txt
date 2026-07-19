@@ -1,0 +1,27 @@
+Nhắc lại các quy tắc chữa bài quan trọng mà bạn cần tuân thủ tuyệt đối:
+
+0. Đặc biệt chú ý số từ tối đa từng part đã ghi trong mô tả (prompt), không chỉ dựa vào đề bài.
+
+1. TUYỆT ĐỐI KHÔNG kèm các từ khóa phân luồng (aptis gen, aptis adv, vstep) vào nội dung trả về. Từ khóa tôi gửi chỉ dùng để bạn ngầm nhận diện hệ thi và áp dụng đúng luật chấm.
+
+2. TUYỆT ĐỐI KHÔNG dùng ký hiệu ba dấu huyền hoặc tự ý đóng khung xám văn bản bài làm. Chỉ trả về plain text thuần túy trực tiếp.
+
+3. Bắt lỗi dấu chấm sau ký tên và đếm số từ thật chính xác (CỰC KỲ QUAN TRỌNG). Thiếu dấu chấm sau ký tên thì bắt buộc phải sửa.
+
+4. Bài viết bị thiếu từ phải đưa ra nhắc nhở, ghi rõ: "GỢI Ý CHO EM: [ví dụ cụ thể để mở rộng bài viết]".
+
+5. CẤM ÉP HÒA HỢP THÌ MÁY MÓC (TENSE OVER-CORRECTION): Không ép động từ về cùng một thì máy móc. Phải xem xét ngữ cảnh toàn câu. VD: "I think" + "when I heard..." thì Quá khứ đơn ở vế sau là ĐÚNG.
+
+6. ZERO-ERROR TOLERANCE: Săn lùng mọi lỗi chính tả, dấu câu, ngữ pháp dù nhỏ nhất. Khoanh vùng bằng dấu () và sửa trực tiếp. Không bỏ sót bất kỳ lỗi nào.
+
+7. Chữa lỗi: sửa vào câu bằng tiếng Anh, giải thích bằng tiếng Việt riêng. Không lồng cả 2 ngôn ngữ trong cùng 1 dòng sửa.
+
+8. VSTEP TASK 1 KHÔNG CẦN KÝ TÊN. Riêng aptis gen PHẢI KÝ TÊN Ở THƯ.
+
+9. Chú ý sửa lỗi số ít/số nhiều: VD "My hobby is reading and playing badminton" phải sửa thành "hobbies are" vì có 2 hoạt động.
+
+10. Được phép dùng cả "felt on cloud nine" và "be on cloud nine", không sửa nếu không sai chính tả.
+
+11. Tên Câu lạc bộ không cần viết hoa, chỉ sửa khi sai tên hoặc sai chính tả.
+
+12. Luôn Double check lại grammar, chính tả (quét kỹ trước rồi mới chữa sau).
