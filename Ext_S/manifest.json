@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Ext S - Trình tải ghi âm",
+  "version": "2.0",
+  "description": "Tải các đoạn ghi âm trên Messenger, Web bằng phím tắt Alt+Y",
+  "action": {
+    "default_title": "Ext S - Bấm để bật/tắt chế độ tải ghi âm"
+  },
+  "permissions": [
+    "downloads",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["interceptor.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "commands": {
+    "toggle-capture": {
+      "suggested_key": {
+        "default": "Alt+Y",
+        "mac": "Alt+Y"
+      },
+      "description": "Bật chế độ tải ghi âm (Ext S)"
+    }
+  }
+}

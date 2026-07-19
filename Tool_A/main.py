@@ -266,26 +266,48 @@ class WTPromptTool:
                 except UnicodeDecodeError:
                     continue
             return ""
-        elif ext == '.docx':
+        elif ext in ['.docx', '.doc', '.rtf']:
+            if ext == '.docx':
+                try:
+                    doc = Document(filepath)
+                    text = []
+                    for para in doc.paragraphs:
+                        text.append(para.text)
+                    for table in doc.tables:
+                        for row in table.rows:
+                            for cell in row.cells:
+                                text.append(cell.text)
+                    return '\n'.join(text)
+                except Exception:
+                    pass
+                    
             try:
-                doc = Document(filepath)
-                text = []
-                for para in doc.paragraphs:
-                    text.append(para.text)
-                for table in doc.tables:
-                    for row in table.rows:
-                        for cell in row.cells:
-                            text.append(cell.text)
-                return '\n'.join(text)
-            except Exception:
-                return ""
+                import win32com.client
+                import pythoncom
+                pythoncom.CoInitialize()
+                word = win32com.client.DispatchEx("Word.Application")
+                word.Visible = False
+                doc = None
+                text = ""
+                try:
+                    abs_path = os.path.abspath(filepath)
+                    doc = word.Documents.Open(abs_path, ReadOnly=True, Visible=False)
+                    text = doc.Content.Text
+                    text = text.replace('\r', '\n')
+                finally:
+                    if doc is not None:
+                        doc.Close(False)
+                    word.Quit()
+                return text
+            except Exception as e:
+                return f"Lỗi đọc file Word: {e}"
         return ""
 
     def select_files(self):
         files = filedialog.askopenfilenames(
             initialdir=self.config['downloads_folder'],
             title="Chọn file học viên",
-            filetypes=(("Text/Word files", "*.txt *.docx"), ("All files", "*.*"))
+            filetypes=(("Text/Word files", "*.txt *.docx *.doc"), ("All files", "*.*"))
         )
         if files:
             self.selected_files = list(files)
@@ -296,7 +318,7 @@ class WTPromptTool:
 
     def use_latest_file(self):
         folder = self.config['input_folder']
-        files = glob.glob(os.path.join(folder, "*.txt")) + glob.glob(os.path.join(folder, "*.docx"))
+        files = glob.glob(os.path.join(folder, "*.txt")) + glob.glob(os.path.join(folder, "*.docx")) + glob.glob(os.path.join(folder, "*.doc"))
         if not files:
             self.update_status("Không tìm thấy file nào trong thư mục input.")
             return
@@ -307,7 +329,7 @@ class WTPromptTool:
 
     def use_all_files(self):
         folder = self.config['input_folder']
-        files = glob.glob(os.path.join(folder, "*.txt")) + glob.glob(os.path.join(folder, "*.docx"))
+        files = glob.glob(os.path.join(folder, "*.txt")) + glob.glob(os.path.join(folder, "*.docx")) + glob.glob(os.path.join(folder, "*.doc"))
         files.sort()
         if not files:
             self.update_status("Không tìm thấy file nào trong thư mục input.")

@@ -1,5 +1,17 @@
 queue.csv
+queue_*.csv
 *.backup
 *.backup2
+*.backup3
+*.backup_*
 __pycache__/
 *.pyc
+
+# Sensitive / credentials
+discord_bot_token.txt
+notify_channel.txt
+settings.ini
+
+# Temp files
+wifi_fix_result.txt
+discord_msg_queue.txt
