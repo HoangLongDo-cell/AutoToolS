@@ -15,3 +15,4 @@ settings.ini
 # Temp files
 wifi_fix_result.txt
 discord_msg_queue.txt
+temp/
